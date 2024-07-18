@@ -11,8 +11,40 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+model users {
+  userId         Int        @id @default(autoincrement())
+  userName       String     @unique
+  hashedPassword String
+  name           String?
+  firstName      String?
+  secondName     String?
+  email          String     @unique
+  userDeleted    Boolean    @default(false)
+  messages       messages[]
+  sessions       sessions[]
+}
+
+model sessions {
+  sessionIdId Int      @id @default(autoincrement())
+  expiresAt   DateTime
+  userId      Int
+  users       users    @relation(fields: [userId], references: [userId], onDelete: NoAction, onUpdate: NoAction)
+}
+
+model forums {
+  forumId         Int        @id @default(autoincrement())
+  foroName        String     @unique
+  foroDescription String
+  forumDeleted    Boolean    @default(false)
+  messages        messages[]
+}
+
 model messages {
-  messageId Int     @id @default(autoincrement())
-  date      String
-  deleted   Boolean
+  messageId      Int      @id @default(autoincrement())
+  date           DateTime @default(now())
+  messageDeleted Boolean  @default(false)
+  forumId        Int
+  userId         Int
+  forums         forums   @relation(fields: [forumId], references: [forumId], onDelete: NoAction, onUpdate: NoAction)
+  users          users    @relation(fields: [userId], references: [userId], onDelete: NoAction, onUpdate: NoAction)
 }
