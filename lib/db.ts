@@ -8,12 +8,4 @@ const libsql = createClient({
 });
 
 const adapter = new PrismaLibSQL(libsql);
-const db = new PrismaClient({ adapter });
-
-async function allUsers () {
-const userList= await db.users.findMany();
-return userList
-}
-const value = await allUsers();
-
-console.log(value);
+export const db = new PrismaClient({ adapter });
