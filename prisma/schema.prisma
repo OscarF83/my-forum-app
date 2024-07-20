@@ -25,7 +25,7 @@ model users {
 }
 
 model sessions {
-  sessionIdId Int      @id @default(autoincrement())
+  sessionId Int      @id @default(autoincrement())
   expiresAt   DateTime
   userId      Int
   users       users    @relation(fields: [userId], references: [userId], onDelete: NoAction, onUpdate: NoAction)

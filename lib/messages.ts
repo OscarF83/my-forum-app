@@ -38,3 +38,9 @@ export async function getMessageById(messageId: number) {
     where: { messageId },
   });
 }
+
+export async function getAllMessagesByForumId(forumId: number) {
+  return await db.messages.findMany({
+    where: { forumId },
+  });
+}

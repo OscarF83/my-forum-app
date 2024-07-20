@@ -1,6 +1,6 @@
 "use client";
 
-import { actionDeleteMessage } from "@/actions/messages";
+import { actionDeleteMessage } from "@/actions/actionMessages";
 import { useRef } from "react";
 
 export type MessageStructure = {
