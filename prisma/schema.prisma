@@ -33,8 +33,8 @@ model sessions {
 
 model forums {
   forumId         Int        @id @default(autoincrement())
-  foroName        String     @unique
-  foroDescription String
+  forumName        String     @unique
+  forumDescription String
   forumDeleted    Boolean    @default(false)
   messages        messages[]
 }
@@ -42,6 +42,7 @@ model forums {
 model messages {
   messageId      Int      @id @default(autoincrement())
   date           DateTime @default(now())
+  text           String
   messageDeleted Boolean  @default(false)
   forumId        Int
   userId         Int

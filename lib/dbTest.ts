@@ -1,3 +1,4 @@
+import { createForum, Forum, getAllForums } from "./forums";
 import { createUser, getAllUsers, getUserById, updateUser, User, UserUpdate } from "./users";
 
 const user1: User = {
@@ -22,6 +23,13 @@ const user2: UserUpdate = {
     userDeleted: true
 }
 
+const forum1 : Forum = {
+  //forumId: number;
+  forumName: "General",
+  forumDescription: "Foro general donde cualquier tema es bienvenido",
+  //forumDeleted: boolean;
+};
+
 /*const createUserTest = (async function () {
     const value = await createUser(user1);
     //console.log(value);
@@ -39,5 +47,15 @@ const getAllUsersTest = (async function () {
 
 const getUserTest = (async function () {
     const value = await getUserById(3);
+    console.log(value);
+  })();
+
+  /*const createForumTest = (async function () {
+    const value = await createForum(forum1);
+    //console.log(value);
+  })();*/
+
+  const getAllForumsTest = (async function () {
+    const value = await getAllForums();
     console.log(value);
   })();

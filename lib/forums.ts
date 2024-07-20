@@ -2,15 +2,15 @@ import { db } from "./db";
 
 export type Forum = {
   forumId?: number;
-  foroName: string;
-  foroDescription: string;
+  forumName: string;
+  forumDescription: string;
   forumDeleted?: boolean;
 };
 
 export type ForumUpdate = {
     forumId?: number;
-    foroName?: string;
-    foroDescription?: string;
+    forumName?: string;
+    forumDescription?: string;
     forumDeleted?: boolean;
   };
 
@@ -29,7 +29,7 @@ export async function getAllForums() {
   return await db.forums.findMany();
 }
 
-export async function getUserById(forumId: number) {
+export async function getForumById(forumId: number) {
   return await db.forums.findMany({
     where: { forumId },
   });
