@@ -1,12 +1,20 @@
 "use client";
 
-import { actionAddMessage } from "@/actions/messages";
+import { actionAddMessage } from "@/actions/actionMessages";
 import React, { useRef, useState } from "react";
-
+//Parte nueva//
+import {useSearchParams} from "next/navigation"
+import { actionAddMessageDb } from "@/actions/actionMessagesDb";
+//////////////
 
 export default function SideForm() {
   const formRef = useRef<HTMLFormElement>(null);
   const [inputFill, setInputFill] = useState("");
+
+  ////////////
+  const searchParams = useSearchParams();
+  const id = Number(searchParams.get("id"));
+  ///////////
 
   const addMessage = async (formData: FormData) => {
     formRef.current?.reset();
@@ -17,6 +25,7 @@ export default function SideForm() {
       setInputFill("All input fields must be completed!");
     } else {
       setInputFill("");
+    await actionAddMessageDb(formData, id);
     await actionAddMessage(formData);
     }
   };
