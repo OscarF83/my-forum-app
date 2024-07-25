@@ -1,5 +1,5 @@
 import { createForum, Forum, getAllForums } from "./forums";
-import { createMessage, getAllMessages, getAllMessagesByForumId, Message } from "./messages";
+import { createMessage, getAllMessages, getAllMessagesByForumId, getAllMessagesByForumIdWithUserName, MessageDb } from "./messages";
 import { createSession, deleteBySessionId, deleteByUserId, Session } from "./sessions";
 import { createUser, getAllUsers, getUserById, updateUser, User, UserUpdate } from "./users";
 
@@ -32,7 +32,7 @@ const forum1 : Forum = {
   //forumDeleted: boolean;
 };
 
-const message1: Message = {
+const message1: MessageDb = {
   //messageId?: number;
   //date?: Date;
   text: "Mi primer mensaje",
@@ -77,10 +77,10 @@ const getAllUsersTest = (async function () {
     console.log(value);
   })();
 
-  const createMessageTest = (async function () {
+  /*const createMessageTest = (async function () {
     const value = await createMessage(message1);
     //console.log(value);
-  })();
+  })();*/
 
   const getAllMessagesTest = (async function () {
     const value = await getAllMessages();
@@ -114,3 +114,10 @@ const getAllUsersTest = (async function () {
     const value = await deleteByUserId(1);
     //console.log(value);
   })();
+
+  const getAllMessagesByForumIdWithUserNameTest = (async function () {
+    const value = await getAllMessagesByForumIdWithUserName(1);
+    console.log(value);
+    console.log(value[2].users.userName)
+  })();
+

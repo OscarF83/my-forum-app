@@ -1,32 +1,26 @@
 "use client";
 
-import { actionAddMessage } from "@/actions/actionMessages";
 import React, { useRef, useState } from "react";
-//Parte nueva//
 import {useSearchParams} from "next/navigation"
 import { actionAddMessageDb } from "@/actions/actionMessagesDb";
-//////////////
 
 export default function SideForm() {
   const formRef = useRef<HTMLFormElement>(null);
   const [inputFill, setInputFill] = useState("");
 
-  ////////////
   const searchParams = useSearchParams();
   const id = Number(searchParams.get("id"));
-  ///////////
 
   const addMessage = async (formData: FormData) => {
     formRef.current?.reset();
-    const nickField = formData.get("nick");
-    const nameField = formData.get("name");
+    //const nickField = formData.get("nick");
+    //const nameField = formData.get("name");
     const messageField = formData.get("message");
-    if ((nickField === "")||(nameField === "")||(messageField === "")){
+    if (/*(nickField === "")||(nameField === "")||(*/messageField === "")/*)*/{
       setInputFill("All input fields must be completed!");
     } else {
       setInputFill("");
     await actionAddMessageDb(formData, id);
-    await actionAddMessage(formData);
     }
   };
 
@@ -37,7 +31,7 @@ export default function SideForm() {
       className="px-2 w-60"
     >
       <div className="top-40 flex flex-col gap-4">
-      <div className="px-1 text-white">Nickname:</div>
+      {/*<div className="px-1 text-white">Nickname:</div>
         <input
           type="text"
           name="nick"
@@ -48,7 +42,7 @@ export default function SideForm() {
           type="password"
           name="name"
           className="border shadow px-2 mr-2 rounded-lg"
-        />
+        />*/}
         <div className="px-1 text-white">Message:</div>
         <textarea
           name="message"
