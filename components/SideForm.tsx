@@ -1,15 +1,16 @@
 "use client";
 
 import React, { useRef, useState } from "react";
-import {useSearchParams} from "next/navigation"
 import { actionAddMessageDb } from "@/actions/actionMessagesDb";
+import { useRouter } from "next/navigation";
 
-export default function SideForm() {
+type SideForumIdProps = {
+    sideForumId: string;
+};
+
+export default function SideForm({sideForumId}:SideForumIdProps) {
   const formRef = useRef<HTMLFormElement>(null);
   const [inputFill, setInputFill] = useState("");
-
-  const searchParams = useSearchParams();
-  const id = Number(searchParams.get("id"));
 
   const addMessage = async (formData: FormData) => {
     formRef.current?.reset();
@@ -20,7 +21,7 @@ export default function SideForm() {
       setInputFill("All input fields must be completed!");
     } else {
       setInputFill("");
-    await actionAddMessageDb(formData, id);
+    await actionAddMessageDb(formData, Number(sideForumId));
     }
   };
 

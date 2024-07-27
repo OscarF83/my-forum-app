@@ -16,7 +16,7 @@ export async function actionAddMessageDb(formData: FormData, forumId: number) {
 
   await createMessage(newMessageData);
 
-  revalidatePath("/");
+  revalidatePath(`/forums/${forumId}`);
 }
 
 export async function actionGetMessagesByForumId(forumId: number) {

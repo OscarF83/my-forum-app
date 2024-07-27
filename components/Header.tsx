@@ -17,7 +17,7 @@ export default function Header() {
       <Button
         variant="link"
         className="text-white"
-        onClick={() => router.push("/forum?id=1")}
+        onClick={() => router.push("/forums")}
       >
         Forum
       </Button>

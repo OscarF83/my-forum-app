@@ -26,7 +26,7 @@ export default async function Home() {
       </p>
       <div className="flex flex-row justify-center">
       <p className="indent-4 leading-relaxed font-semibold px-40 py-4 text-center gap-2">
-        Click on <a className="underline font-extrabold" href="/forum?id=1">Forum</a> to start posting
+        Click on <a className="underline font-extrabold" href="/forums">Forum</a> to start posting
       </p>
       </div>
     </main>
