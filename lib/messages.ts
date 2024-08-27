@@ -29,48 +29,84 @@ export type MessageUpdate = {
 };
 
 export async function createMessage(messageData: MessageDb) {
-  return await db.messages.create({ data: messageData });
+  try {
+    const result = await db.messages.create({ data: messageData });
+    return result;
+  } catch (e) {
+    console.log(`Error caught: ${e}`);
+    return "Internal Server Error, please try again later!";
+  }
 }
 
 export async function updateMessage(
   messageId: number,
   newMessageData: MessageUpdate
 ) {
-  return await db.messages.update({
-    where: { messageId },
-    data: newMessageData,
-  });
+  try {
+    const result = await db.messages.update({
+      where: { messageId },
+      data: newMessageData,
+    });
+    return result;
+  } catch (e) {
+    console.log(`Error caught: ${e}`);
+    return "Internal Server Error, please try again later!";
+  }
 }
 
 export async function getAllMessages() {
-  return await db.messages.findMany();
+  try {
+    const result = await db.messages.findMany();
+    return result;
+  } catch (e) {
+    console.log(`Error caught: ${e}`);
+    return "Internal Server Error, please try again later!";
+  }
 }
 
 export async function getMessageById(messageId: number) {
-  return await db.messages.findMany({
-    where: { messageId },
-  });
+  try {
+    const result = await db.messages.findMany({
+      where: { messageId },
+    });
+    return result;
+  } catch (e) {
+    console.log(`Error caught: ${e}`);
+    return "Internal Server Error, please try again later!";
+  }
 }
 
 export async function getAllMessagesByForumId(forumId: number) {
-  return await db.messages.findMany({
-    where: { forumId },
-  });
+  try {
+    const result = await db.messages.findMany({
+      where: { forumId },
+    });
+    return result;
+  } catch (e) {
+    console.log(`Error caught: ${e}`);
+    return "Internal Server Error, please try again later!";
+  }
 }
 
 export async function getAllMessagesByForumIdWithUserName(forumId: number) {
-  return await db.messages.findMany({
-    select: {
-      messageId: true,
-      date: true,
-      text: true,
-      messageDeleted: true,
-      users: {
-        select: {
-          userName: true,
+  try {
+    const result = await db.messages.findMany({
+      select: {
+        messageId: true,
+        date: true,
+        text: true,
+        messageDeleted: true,
+        users: {
+          select: {
+            userName: true,
+          },
         },
       },
-    },
-    where: { forumId },
-  });
+      where: { forumId },
+    });
+    return result;
+  } catch (e) {
+    console.log(`Error caught: ${e}`);
+    return "Internal Server Error, please try again later!";
+  }
 }

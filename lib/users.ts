@@ -23,22 +23,46 @@ export type UserUpdate = {
 };
 
 export async function createUser(userData: User) {
-  return await db.users.create({ data: userData });
+  try {
+    const result = await db.users.create({ data: userData });
+    return result;
+  } catch (e) {
+    console.log(`Error caught: ${e}`);
+    return "Internal Server Error, please try again later!";
+  }
 }
 
 export async function updateUser(userId: number, newUserData: UserUpdate) {
-  return await db.users.update({
-    where: { userId },
-    data: newUserData,
-  });
+  try {
+    const result = await db.users.update({
+      where: { userId },
+      data: newUserData,
+    });
+    return result;
+  } catch (e) {
+    console.log(`Error caught: ${e}`);
+    return "Internal Server Error, please try again later!";
+  }
 }
 
 export async function getAllUsers() {
-  return await db.users.findMany();
+  try {
+    const result = await db.users.findMany();
+    return result;
+  } catch (e) {
+    console.log(`Error caught: ${e}`);
+    return "Internal Server Error, please try again later!";
+  }
 }
 
 export async function getUserById(userId: number) {
-  return await db.users.findMany({
-    where: { userId },
-  });
+  try {
+    const result = await db.users.findMany({
+      where: { userId },
+    });
+    return result;
+  } catch (e) {
+    console.log(`Error caught: ${e}`);
+    return "Internal Server Error, please try again later!";
+  }
 }

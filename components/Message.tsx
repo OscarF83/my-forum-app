@@ -4,14 +4,14 @@ import { actionDeleteMessageDb } from "@/actions/actionMessagesDb";
 import { MessageDbReturn } from "@/lib/messages";
 import { useRef } from "react";
 
-export type MessageStructure = {
+/*export type MessageStructure = {
   id: number;
   nickName: string;
   name: string;
   date: string;
   text: string;
   deleted: boolean;
-};
+};*/
 
 type MessageProps = {
   message: MessageDbReturn;

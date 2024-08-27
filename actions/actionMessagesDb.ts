@@ -1,6 +1,13 @@
 "use server";
 
-import { createMessage, getAllMessagesByForumIdWithUserName, getMessageById, MessageDb, MessageDbReturn, updateMessage } from "@/lib/messages";
+import {
+  createMessage,
+  getAllMessagesByForumIdWithUserName,
+  getMessageById,
+  type MessageDb,
+  type MessageDbReturn,
+  updateMessage,
+} from "@/lib/messages";
 import { revalidatePath } from "next/cache";
 
 export async function actionAddMessageDb(formData: FormData, forumId: number) {
@@ -11,8 +18,8 @@ export async function actionAddMessageDb(formData: FormData, forumId: number) {
   const newMessageData: MessageDb = {
     text: message,
     forumId: forumId,
-    userId: 1
-  }
+    userId: 1,
+  };
 
   await createMessage(newMessageData);
 
@@ -22,14 +29,22 @@ export async function actionAddMessageDb(formData: FormData, forumId: number) {
 export async function actionGetMessagesByForumId(forumId: number) {
   const newMessagesList = await getAllMessagesByForumIdWithUserName(forumId);
   console.log(newMessagesList);
-  return newMessagesList as MessageDbReturn[];
+  //return newMessagesList as MessageDbReturn[];
+  return newMessagesList;
 }
 
-export async function actionDeleteMessageDb(id: number, password: string | null) {
-  const foundMessage = await getMessageById(id);
-  if (foundMessage[0].userId == Number(password)){
-    await updateMessage(id, {messageDeleted: true});
-  }
- revalidatePath("/");
-
+export async function actionDeleteMessageDb(
+  id: number,
+  password: string | null
+) {
+  //try{
+  const foundMessage: MessageDb[] | string = await getMessageById(id);
+  if (typeof foundMessage != "string") {
+    if (foundMessage[0].userId == Number(password)) {
+      await updateMessage(id, { messageDeleted: true });
+    }
+  } /*} catch (error) {
+    throw "Aqui esta el error";
+  }*/
+  revalidatePath("/");
 }

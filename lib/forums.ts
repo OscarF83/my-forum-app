@@ -8,29 +8,53 @@ export type Forum = {
 };
 
 export type ForumUpdate = {
-    forumId?: number;
-    forumName?: string;
-    forumDescription?: string;
-    forumDeleted?: boolean;
-  };
+  forumId?: number;
+  forumName?: string;
+  forumDescription?: string;
+  forumDeleted?: boolean;
+};
 
 export async function createForum(forumData: Forum) {
-  return await db.forums.create({ data: forumData });
+  try {
+    const result = await db.forums.create({ data: forumData });
+    return result;
+  } catch (e) {
+    console.log(`Error caught: ${e}`);
+    return "Internal Server Error, please try again later!";
+  }
 }
 
 export async function updateForum(forumId: number, newForumData: ForumUpdate) {
-  return await db.forums.update({
-    where: { forumId },
-    data: newForumData,
-  });
+  try {
+    const result = await db.forums.update({
+      where: { forumId },
+      data: newForumData,
+    });
+    return result;
+  } catch (e) {
+    console.log(`Error caught: ${e}`);
+    return "Internal Server Error, please try again later!";
+  }
 }
 
 export async function getAllForums() {
-  return await db.forums.findMany();
+  try {
+    const result = await db.forums.findMany();
+    return result;
+  } catch (e) {
+    console.log(`Error caught: ${e}`);
+    return "Internal Server Error, please try again later!";
+  }
 }
 
 export async function getForumById(forumId: number) {
-  return await db.forums.findMany({
-    where: { forumId },
-  });
+  try {
+    const result = await db.forums.findMany({
+      where: { forumId },
+    });
+    return result;
+  } catch (e) {
+    console.log(`Error caught: ${e}`);
+    return "Internal Server Error, please try again later!";
+  }
 }

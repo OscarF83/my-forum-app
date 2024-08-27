@@ -2,6 +2,7 @@
 
 import { actionGetMessagesByForumId } from "@/actions/actionMessagesDb";
 import Message from "@/components/Message";
+import MessageError from "@/components/MessageError";
 //import { MessageDbReturn } from "@/lib/messages";
 //import {useSearchParams} from "next/navigation"
 //import { useEffect, useState } from "react";
@@ -25,7 +26,7 @@ export default async function ForumPage({params}:ForumPageProps) {
   const {forumId} = params;
   const messagesList2 = await actionGetMessagesByForumId(Number(forumId));
 
-  if(messagesList2 != null){
+  if(typeof messagesList2 != "string"){
     return (
       <main className="flex flex-row">
         <div></div>
@@ -40,8 +41,7 @@ export default async function ForumPage({params}:ForumPageProps) {
   } else {
     return (
       <main className="flex flex-row px-80 py-10">
-        Loading...
-        {/*<MessageError/> */}
+        <MessageError errorMessage={messagesList2}/>
       </main>
     );
   }

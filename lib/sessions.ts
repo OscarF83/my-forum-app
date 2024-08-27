@@ -7,33 +7,69 @@ export type Session = {
 };
 
 export async function createSession(sessionData: Session) {
-  return await db.sessions.create({ data: sessionData });
+  try {
+    const result = await db.sessions.create({ data: sessionData });
+    return result;
+  } catch (e) {
+    console.log(`Error caught: ${e}`);
+    return "Internal Server Error, please try again later!";
+  }
 }
 
 export async function getAllSessions() {
-  return await db.sessions.findMany();
+  try {
+    const result = await db.sessions.findMany();
+    return result;
+  } catch (e) {
+    console.log(`Error caught: ${e}`);
+    return "Internal Server Error, please try again later!";
+  }
 }
 
 export async function getSessionById(sessionId: number) {
-  return await db.sessions.findMany({
-    where: { sessionId },
-  });
+  try {
+    const result = await db.sessions.findMany({
+      where: { sessionId },
+    });
+    return result;
+  } catch (e) {
+    console.log(`Error caught: ${e}`);
+    return "Internal Server Error, please try again later!";
+  }
 }
 
 export async function getAllSessionsByUserId(userId: number) {
-  return await db.sessions.findMany({
-    where: { userId },
-  });
+  try {
+    const result = await db.sessions.findMany({
+      where: { userId },
+    });
+    return result;
+  } catch (e) {
+    console.log(`Error caught: ${e}`);
+    return "Internal Server Error, please try again later!";
+  }
 }
 
 export async function deleteBySessionId(sessionId: number) {
-  return await db.sessions.deleteMany({
-    where: { sessionId },
-  });
+  try {
+    const result = await db.sessions.deleteMany({
+      where: { sessionId },
+    });
+    return result;
+  } catch (e) {
+    console.log(`Error caught: ${e}`);
+    return "Internal Server Error, please try again later!";
+  }
 }
 
 export async function deleteByUserId(userId: number) {
-  return await db.sessions.deleteMany({
-    where: { userId },
-  });
+  try {
+    const result = await db.sessions.deleteMany({
+      where: { userId },
+    });
+    return result;
+  } catch (e) {
+    console.log(`Error caught: ${e}`);
+    return "Internal Server Error, please try again later!";
+  }
 }
