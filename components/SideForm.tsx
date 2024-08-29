@@ -5,10 +5,10 @@ import { actionAddMessageDb } from "@/actions/actionMessagesDb";
 import { useRouter } from "next/navigation";
 
 type SideForumIdProps = {
-    sideForumId: string;
+  sideForumId: string;
 };
 
-export default function SideForm({sideForumId}:SideForumIdProps) {
+export default function SideForm({ sideForumId }: SideForumIdProps) {
   const formRef = useRef<HTMLFormElement>(null);
   const [inputFill, setInputFill] = useState("");
 
@@ -17,22 +17,24 @@ export default function SideForm({sideForumId}:SideForumIdProps) {
     //const nickField = formData.get("nick");
     //const nameField = formData.get("name");
     const messageField = formData.get("message");
-    if (/*(nickField === "")||(nameField === "")||(*/messageField === "")/*)*/{
-      setInputFill("All input fields must be completed!");
+    if (/*(nickField === "")||(nameField === "")||(*/ messageField === "") {
+      /*)*/ setInputFill("All input fields must be completed!");
     } else {
-      setInputFill("");
-    await actionAddMessageDb(formData, Number(sideForumId));
+      //setInputFill("");
+      const result = await actionAddMessageDb(formData, Number(sideForumId));
+      //const result = "Internal Server Error, please try again later!";
+      if (typeof result != "string") {
+        setInputFill("");
+      } else {
+        setInputFill(result);
+      }
     }
   };
 
   return (
-    <form
-      ref={formRef}
-      action={addMessage}
-      className="px-2 w-60"
-    >
+    <form ref={formRef} action={addMessage} className="px-2 w-60">
       <div className="top-40 flex flex-col gap-4">
-      {/*<div className="px-1 text-white">Nickname:</div>
+        {/*<div className="px-1 text-white">Nickname:</div>
         <input
           type="text"
           name="nick"

@@ -1,11 +1,9 @@
-//"use client";
-
 import { actionGetMessagesByForumId } from "@/actions/actionMessagesDb";
 import Message from "@/components/Message";
 import MessageError from "@/components/MessageError";
-//import { MessageDbReturn } from "@/lib/messages";
-//import {useSearchParams} from "next/navigation"
-//import { useEffect, useState } from "react";
+import { getForumById } from "@/lib/forums";
+import { getAllMessagesByForumIdWithUserName } from "@/lib/messages";
+import { redirect } from "next/navigation";
 
 type ForumPageProps = {
   params: {
@@ -13,25 +11,29 @@ type ForumPageProps = {
   };
 };
 
-export default async function ForumPage({params}:ForumPageProps) {
-  //const [messagesList, setMessagesList] = useState<MessageDbReturn[] | null>(null);
-  //const searchParams = useSearchParams();
-  //const id = Number(searchParams.get("id"));
+export default async function ForumPage({ params }: ForumPageProps) {
+  const { forumId } = params;
 
-  /*useEffect(() => {
-   actionGetMessagesByForumId(1).then(setMessagesList);
-    console.log(`Este es mi resultado ${messagesList}`);
-  }, []);*/
+  /// Check if forumId exists ///
+  const checkForumId = await getForumById(Number(forumId)); //La solicitud es directa a la base de datos no a través de action ya que la pagina es de servidor
+  if (typeof checkForumId != "string") {
+    if (checkForumId.length == 0) {
+      redirect(`/_not-found`);
+    }
+  }
+  /////////////////////////////
 
-  const {forumId} = params;
-  const messagesList2 = await actionGetMessagesByForumId(Number(forumId));
+  // Solicitud a través de action/// const messagesList2 = await actionGetMessagesByForumId(Number(forumId));
+  const messagesList = await getAllMessagesByForumIdWithUserName(
+    Number(forumId)
+  ); // solicitud directa a la base no a través de action
 
-  if(typeof messagesList2 != "string"){
+  if (typeof messagesList != "string") {
     return (
       <main className="flex flex-row">
         <div></div>
         <div className="px-80 flex flex-col-reverse gap-2">
-          {messagesList2.map((a) => (
+          {messagesList.map((a) => (
             <Message key={a.messageId} message={a} />
           ))}
         </div>
@@ -41,7 +43,7 @@ export default async function ForumPage({params}:ForumPageProps) {
   } else {
     return (
       <main className="flex flex-row px-80 py-10">
-        <MessageError errorMessage={messagesList2}/>
+        <MessageError errorMessage={messagesList} />
       </main>
     );
   }

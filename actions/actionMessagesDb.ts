@@ -9,6 +9,7 @@ import {
   updateMessage,
 } from "@/lib/messages";
 import { revalidatePath } from "next/cache";
+import { redirect } from "next/navigation";
 
 export async function actionAddMessageDb(formData: FormData, forumId: number) {
   const messageField = formData.get("message");
@@ -21,15 +22,17 @@ export async function actionAddMessageDb(formData: FormData, forumId: number) {
     userId: 1,
   };
 
-  await createMessage(newMessageData);
+  const newMessage = await createMessage(newMessageData);
 
-  revalidatePath(`/forums/${forumId}`);
+  revalidatePath(`/`);
+  //revalidatePath(`/forums/${forumId}`);
+  //redirect(`/_not-found`);
+  return newMessage;
 }
 
 export async function actionGetMessagesByForumId(forumId: number) {
   const newMessagesList = await getAllMessagesByForumIdWithUserName(forumId);
   console.log(newMessagesList);
-  //return newMessagesList as MessageDbReturn[];
   return newMessagesList;
 }
 
@@ -37,14 +40,11 @@ export async function actionDeleteMessageDb(
   id: number,
   password: string | null
 ) {
-  //try{
   const foundMessage: MessageDb[] | string = await getMessageById(id);
   if (typeof foundMessage != "string") {
     if (foundMessage[0].userId == Number(password)) {
       await updateMessage(id, { messageDeleted: true });
     }
-  } /*} catch (error) {
-    throw "Aqui esta el error";
-  }*/
+  }
   revalidatePath("/");
 }
