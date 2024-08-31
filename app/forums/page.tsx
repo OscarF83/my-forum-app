@@ -1,3 +1,4 @@
+import ForumList from "@/components/ForumList";
 import MessageError from "@/components/MessageError";
 import { getAllForums } from "@/lib/forums";
 import Link from "next/link";
@@ -8,13 +9,12 @@ export default async function Forums() {
 
   if (typeof listForums != "string") {
     return (
-      <main className="flex flex-col">
+      <main className="flex flex-row">
         <div></div>
-        <div className="px-10 py-32 flex flex-row gap-2">
-          <Link href="/forums/1">Go to forum1 page</Link>
-        </div>
-        <div className="px-10 py-2 flex flex-row gap-2 w-60">
-          <Link href="/forums/2">Go to forum2 page</Link>
+        <div className="w-screen h-screen flex flex-col justify-center items-center gap-2">
+        {listForums.map((a) => (
+          <ForumList key={a.forumId} forum={a} />
+        ))}
         </div>
         <div></div>
       </main>
