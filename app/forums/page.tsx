@@ -11,7 +11,7 @@ export default async function Forums() {
     return (
       <main className="flex flex-row">
         <div></div>
-        <div className="w-screen h-screen flex flex-col justify-center items-center gap-2">
+        <div className="w-screen h-screen flex flex-col justify-center items-center gap-4">
         {listForums.map((a) => (
           <ForumList key={a.forumId} forum={a} />
         ))}
