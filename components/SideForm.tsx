@@ -2,7 +2,9 @@
 
 import React, { useRef, useState } from "react";
 import { actionAddMessageDb } from "@/actions/actionMessagesDb";
-import { useRouter } from "next/navigation";
+import { useSearchParams } from "next/navigation";
+import { Button } from "./ui/button";
+import { actionLogout } from "@/actions/auth";
 
 type SideForumIdProps = {
   sideForumId: string;
@@ -11,6 +13,11 @@ type SideForumIdProps = {
 export default function SideForm({ sideForumId }: SideForumIdProps) {
   const formRef = useRef<HTMLFormElement>(null);
   const [inputFill, setInputFill] = useState("");
+
+  //// Aqui capturo el userId////
+  const searchParams = useSearchParams();
+  const userId = searchParams.get('userId');
+  //////////////////////////////////
 
   const addMessage = async (formData: FormData) => {
     formRef.current?.reset();
@@ -21,7 +28,7 @@ export default function SideForm({ sideForumId }: SideForumIdProps) {
       /*)*/ setInputFill("All input fields must be completed!");
     } else {
       //setInputFill("");
-      const result = await actionAddMessageDb(formData, Number(sideForumId));
+      const result = await actionAddMessageDb(formData, Number(sideForumId), Number(userId));
       //const result = "Internal Server Error, please try again later!";
       if (typeof result != "string") {
         setInputFill("");
@@ -55,6 +62,13 @@ export default function SideForm({ sideForumId }: SideForumIdProps) {
           Send
         </button>
         <div className="px-1 font-bold text-red-500">{inputFill}</div>
+        <Button
+        variant="link"
+        className="text-white"
+        onClick={() => actionLogout()}
+      >
+        Logout
+      </Button>
       </div>
     </form>
   );

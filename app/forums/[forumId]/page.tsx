@@ -23,10 +23,13 @@ export default async function ForumPage({ params }: ForumPageProps) {
   }
   /////////////////////////////
 
-  // Solicitud a través de action/// const messagesList2 = await actionGetMessagesByForumId(Number(forumId));
-  const messagesList = await getAllMessagesByForumIdWithUserName(
+  // Solicitud a través de action/// 
+  const messagesList = await actionGetMessagesByForumId(Number(forumId));
+  /*const messagesList = await getAllMessagesByForumIdWithUserName(
     Number(forumId)
-  ); // solicitud directa a la base no a través de action
+  );*/ // solicitud directa a la base no a través de action
+  console.log(messagesList[messagesList.length-1]);
+  console.log(forumId);
 
   if (typeof messagesList != "string") {
     return (

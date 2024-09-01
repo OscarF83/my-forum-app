@@ -1,5 +1,6 @@
 "use server";
 
+import { getAllForums } from "@/lib/forums";
 import {
   createMessage,
   getAllMessagesByForumIdWithUserName,
@@ -9,9 +10,13 @@ import {
   updateMessage,
 } from "@/lib/messages";
 import { revalidatePath } from "next/cache";
-import { redirect } from "next/navigation";
+//import { redirect } from "next/navigation";
 
-export async function actionAddMessageDb(formData: FormData, forumId: number) {
+export async function actionAddMessageDb(
+  formData: FormData,
+  forumId: number,
+  userId: number
+) {
   const messageField = formData.get("message");
 
   const message = messageField!.toString();
@@ -19,14 +24,16 @@ export async function actionAddMessageDb(formData: FormData, forumId: number) {
   const newMessageData: MessageDb = {
     text: message,
     forumId: forumId,
-    userId: 1,
+    userId: userId,
   };
 
   const newMessage = await createMessage(newMessageData);
 
-  revalidatePath(`/`);
-  //revalidatePath(`/forums/${forumId}`);
-  //redirect(`/_not-found`);
+  //revalidatePath(`/forums/${forumId}`);// No funciona
+  const allForums = await getAllForums();
+  if (typeof allForums != "string") {
+    allForums.map((a) => revalidatePath(`/forums/${a.forumId}`));
+  }
   return newMessage;
 }
 
@@ -46,5 +53,8 @@ export async function actionDeleteMessageDb(
       await updateMessage(id, { messageDeleted: true });
     }
   }
-  revalidatePath("/");
+  const allForums = await getAllForums();
+  if (typeof allForums != "string") {
+    allForums.map((a) => revalidatePath(`/forums/${a.forumId}`));
+  }
 }

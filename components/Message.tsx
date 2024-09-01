@@ -49,7 +49,7 @@ export default function Message({ message }: MessageProps) {
               className="border shadow font-bold pr-2 py-1 px-7 my-2 rounded-lg bg-stone-200 hover:bg-stone-400"
             >
               <img
-                src="/icon.png"
+                src="/images/icon.png"
                 alt="icon"
                 style={{ width: "20px", height: "20px" }}
               />
