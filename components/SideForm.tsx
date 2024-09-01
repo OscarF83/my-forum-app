@@ -39,7 +39,7 @@ export default function SideForm({ sideForumId }: SideForumIdProps) {
   };
 
   return (
-    <form ref={formRef} action={addMessage} className="px-2 w-60">
+    <form ref={formRef} action={addMessage} className="px-4 w-60">
       <div className="top-40 flex flex-col gap-4">
         {/*<div className="px-1 text-white">Nickname:</div>
         <input
@@ -56,7 +56,7 @@ export default function SideForm({ sideForumId }: SideForumIdProps) {
         <div className="px-1 text-white">Message:</div>
         <textarea
           name="message"
-          className="border shadow px-2 py-2 pb-40 mr-2 rounded-lg text-wrap"
+          className="border shadow px-6 py-2 pb-40 mr-2 rounded-lg text-wrap"
         />
         <button className="border shadow font-bold px-2 py-2 mr-2 rounded-lg bg-stone-200 hover:bg-stone-400">
           Send

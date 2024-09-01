@@ -35,7 +35,7 @@ export default async function ForumPage({ params }: ForumPageProps) {
     return (
       <main className="flex flex-row">
         <div></div>
-        <div className="px-80 flex flex-col-reverse gap-2">
+        <div className="wmessageDiv flex flex-col-reverse gap-2 justify-center items-center">
           {messagesList.map((a) => (
             <Message key={a.messageId} message={a} />
           ))}

@@ -71,14 +71,20 @@ h1 {
   @apply font-extrabold text-3xl mb-4;
 }
 .wmessage {
-  width: 800px;
+  /*width: 800px;*/
+  width: 70%; /* El ancho será el 50% del ancho de la ventana del navegador */
+  max-width: 2000px; /* Ancho máximo */
+  min-width: 300px; /* Ancho mínimo */
 }
 .hmessage {
-  height: 300px;
+  min-height: 150px;
 }
 .hsidebar{
   box-sizing: border-box;
   min-height: 900px;
+}
+.wmessageDiv{
+  width: 90vw;
 }
 .debug {
   @apply border-4 border-red-600;
