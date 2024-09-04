@@ -16,7 +16,7 @@ export default function SideForm({ sideForumId }: SideForumIdProps) {
 
   //// Aqui capturo el userId////
   const searchParams = useSearchParams();
-  const userId = searchParams.get('userId');
+  const userId = searchParams.get("userId");
   //////////////////////////////////
 
   const addMessage = async (formData: FormData) => {
@@ -28,7 +28,11 @@ export default function SideForm({ sideForumId }: SideForumIdProps) {
       /*)*/ setInputFill("All input fields must be completed!");
     } else {
       //setInputFill("");
-      const result = await actionAddMessageDb(formData, Number(sideForumId), Number(userId));
+      const result = await actionAddMessageDb(
+        formData,
+        Number(sideForumId),
+        Number(userId)
+      );
       //const result = "Internal Server Error, please try again later!";
       if (typeof result != "string") {
         setInputFill("");
@@ -39,9 +43,10 @@ export default function SideForm({ sideForumId }: SideForumIdProps) {
   };
 
   return (
-    <form ref={formRef} action={addMessage} className="px-4 w-60">
-      <div className="top-40 flex flex-col gap-4">
-        {/*<div className="px-1 text-white">Nickname:</div>
+    <div>
+      <form ref={formRef} action={addMessage} className="px-4 w-60">
+        <div className="top-40 flex flex-col gap-4">
+          {/*<div className="px-1 text-white">Nickname:</div>
         <input
           type="text"
           name="nick"
@@ -53,23 +58,24 @@ export default function SideForm({ sideForumId }: SideForumIdProps) {
           name="name"
           className="border shadow px-2 mr-2 rounded-lg"
         />*/}
-        <div className="px-1 text-white">Message:</div>
-        <textarea
-          name="message"
-          className="border shadow px-6 py-2 pb-40 mr-2 rounded-lg text-wrap"
-        />
-        <button className="border shadow font-bold px-2 py-2 mr-2 rounded-lg bg-stone-200 hover:bg-stone-400">
-          Send
-        </button>
-        <div className="px-1 font-bold text-red-500">{inputFill}</div>
-        <Button
+          <div className="px-1 text-white">Message:</div>
+          <textarea
+            name="message"
+            className="border shadow px-6 py-2 pb-40 mr-2 rounded-lg text-wrap"
+          />
+          <button className="border shadow font-bold px-2 py-2 mr-2 rounded-lg bg-stone-200 hover:bg-stone-400">
+            Send
+          </button>
+          <div className="px-1 font-bold text-red-500">{inputFill}</div>
+        </div>
+      </form>
+      <Button
         variant="link"
         className="text-white"
         onClick={() => actionLogout()}
       >
         Logout
       </Button>
-      </div>
-    </form>
+    </div>
   );
 }

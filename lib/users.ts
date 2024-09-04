@@ -66,3 +66,15 @@ export async function getUserById(userId: number) {
     return "Internal Server Error, please try again later!";
   }
 }
+
+export async function getUserByUserName(userName: string) {
+  try {
+    const result = await db.users.findMany({
+      where: { userName },
+    });
+    return result;
+  } catch (e) {
+    console.log(`Error caught: ${e}`);
+    return "Internal Server Error, please try again later!";
+  }
+}
