@@ -1,7 +1,7 @@
 import { db } from "./db";
 
 export type User = {
-  userId?: number;
+  userId: string;
   userName: string;
   hashedPassword: string;
   name?: string | null;
@@ -12,7 +12,7 @@ export type User = {
 };
 
 export type UserUpdate = {
-  userId?: number;
+  userId?: string;
   userName?: string;
   hashedPassword?: string;
   name?: string | null;
@@ -32,7 +32,7 @@ export async function createUser(userData: User) {
   }
 }
 
-export async function updateUser(userId: number, newUserData: UserUpdate) {
+export async function updateUser(userId: string, newUserData: UserUpdate) {
   try {
     const result = await db.users.update({
       where: { userId },
@@ -55,7 +55,7 @@ export async function getAllUsers() {
   }
 }
 
-export async function getUserById(userId: number) {
+export async function getUserById(userId: string) {
   try {
     const result = await db.users.findMany({
       where: { userId },

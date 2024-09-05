@@ -12,7 +12,7 @@ datasource db {
 }
 
 model users {
-  userId         Int        @id @default(autoincrement())
+  userId         String     @id
   userName       String     @unique
   hashedPassword String
   name           String?
@@ -25,18 +25,18 @@ model users {
 }
 
 model sessions {
-  sessionId Int      @id @default(autoincrement())
-  expiresAt   DateTime
-  userId      Int
-  users       users    @relation(fields: [userId], references: [userId], onDelete: NoAction, onUpdate: NoAction)
+  sessionId String   @id
+  expiresAt DateTime
+  userId    String
+  users     users    @relation(fields: [userId], references: [userId], onDelete: NoAction, onUpdate: NoAction)
 }
 
 model forums {
-  forumId         Int        @id @default(autoincrement())
+  forumId          Int        @id @default(autoincrement())
   forumName        String     @unique
   forumDescription String
-  forumDeleted    Boolean    @default(false)
-  messages        messages[]
+  forumDeleted     Boolean    @default(false)
+  messages         messages[]
 }
 
 model messages {
@@ -45,7 +45,7 @@ model messages {
   text           String
   messageDeleted Boolean  @default(false)
   forumId        Int
-  userId         Int
+  userId         String
   forums         forums   @relation(fields: [forumId], references: [forumId], onDelete: NoAction, onUpdate: NoAction)
   users          users    @relation(fields: [userId], references: [userId], onDelete: NoAction, onUpdate: NoAction)
 }

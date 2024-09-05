@@ -10,7 +10,7 @@ export async function middleware(req: NextRequest) {
     );
   }
   const token = authCookie.value;
-  const session = await getSessionById(Number(token));
+  const session = await getSessionById(token);
   if(typeof session == "string"){
     return
   }

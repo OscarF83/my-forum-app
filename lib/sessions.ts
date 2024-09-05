@@ -1,9 +1,9 @@
 import { db } from "./db";
 
 export type Session = {
-  sessionId?: number;
+  sessionId: string;
   expiresAt: Date;
-  userId: number;
+  userId: string;
 };
 
 export async function createSession(sessionData: Session) {
@@ -26,7 +26,7 @@ export async function getAllSessions() {
   }
 }
 
-export async function getSessionById(sessionId: number) {
+export async function getSessionById(sessionId: string) {
   try {
     const result = await db.sessions.findMany({
       where: { sessionId },
@@ -38,7 +38,7 @@ export async function getSessionById(sessionId: number) {
   }
 }
 
-export async function getAllSessionsByUserId(userId: number) {
+export async function getAllSessionsByUserId(userId: string) {
   try {
     const result = await db.sessions.findMany({
       where: { userId },
@@ -50,7 +50,7 @@ export async function getAllSessionsByUserId(userId: number) {
   }
 }
 
-export async function deleteBySessionId(sessionId: number) {
+export async function deleteBySessionId(sessionId: string) {
   try {
     const result = await db.sessions.deleteMany({
       where: { sessionId },
@@ -62,7 +62,7 @@ export async function deleteBySessionId(sessionId: number) {
   }
 }
 
-export async function deleteByUserId(userId: number) {
+export async function deleteByUserId(userId: string) {
   try {
     const result = await db.sessions.deleteMany({
       where: { userId },

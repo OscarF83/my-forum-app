@@ -15,7 +15,7 @@ import { revalidatePath } from "next/cache";
 export async function actionAddMessageDb(
   formData: FormData,
   forumId: number,
-  userId: number
+  userId: string
 ) {
   const messageField = formData.get("message");
 
@@ -49,7 +49,7 @@ export async function actionDeleteMessageDb(
 ) {
   const foundMessage: MessageDb[] | string = await getMessageById(id);
   if (typeof foundMessage != "string") {
-    if (foundMessage[0].userId == Number(password)) {
+    if (foundMessage[0].userId == password) {
       await updateMessage(id, { messageDeleted: true });
     }
   }

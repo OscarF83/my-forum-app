@@ -6,7 +6,7 @@ export type MessageDb = {
   text: string;
   messageDeleted?: boolean;
   forumId: number;
-  userId: number;
+  userId: string;
 };
 
 export type MessageDbReturn = {
@@ -25,7 +25,7 @@ export type MessageUpdate = {
   text?: string;
   messageDeleted?: boolean;
   forumId?: number;
-  userId?: number;
+  userId?: string;
 };
 
 export async function createMessage(messageData: MessageDb) {

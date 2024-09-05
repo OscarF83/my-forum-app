@@ -31,7 +31,7 @@ export default function SideForm({ sideForumId }: SideForumIdProps) {
       const result = await actionAddMessageDb(
         formData,
         Number(sideForumId),
-        Number(userId)
+        userId ? userId : "0"   // OJO!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
       );
       //const result = "Internal Server Error, please try again later!";
       if (typeof result != "string") {
