@@ -1,6 +1,6 @@
 "use server";
 
-import { getAllForums } from "@/lib/forums";
+import { getAllForums } from "@/db/forums";
 import {
   createMessage,
   getAllMessagesByForumIdWithUserName,
@@ -8,7 +8,7 @@ import {
   type MessageDb,
   type MessageDbReturn,
   updateMessage,
-} from "@/lib/messages";
+} from "@/db/messages";
 import { revalidatePath } from "next/cache";
 //import { redirect } from "next/navigation";
 

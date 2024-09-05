@@ -14,9 +14,9 @@ export default function SideForm({ sideForumId }: SideForumIdProps) {
   const formRef = useRef<HTMLFormElement>(null);
   const [inputFill, setInputFill] = useState("");
 
-  //// Aqui capturo el userId////
+  //// Aqui capturo el userId//// es podria canviar per sessionId i buscar despres userId
   const searchParams = useSearchParams();
-  const userId = searchParams.get("userId");
+  const userId = searchParams.get("rrr");
   //////////////////////////////////
 
   const addMessage = async (formData: FormData) => {

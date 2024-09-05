@@ -6,7 +6,7 @@ export type Session = {
   userId: string;
 };
 
-export async function createSession(sessionData: Session) {
+export async function insertSession(sessionData: Session) {
   try {
     const result = await db.sessions.create({ data: sessionData });
     return result;
@@ -14,6 +14,12 @@ export async function createSession(sessionData: Session) {
     console.log(`Error caught: ${e}`);
     return "Internal Server Error, please try again later!";
   }
+}
+
+export async function createSession(userId: string) {
+  const sessionId = crypto.randomUUID();
+  const expiresAt = new Date(new Date().setDate(new Date().getDate() + 30));
+  return await insertSession({ sessionId, expiresAt, userId });
 }
 
 export async function getAllSessions() {

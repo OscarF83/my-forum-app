@@ -1,8 +1,10 @@
 "use server";
 
-import { getUserByUserName } from "@/lib/users";
+import { getUserByUserName } from "@/db/users";
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
+import * as bcrypt from "bcryptjs";
+import { createSession } from "@/db/sessions";
 
 export async function actionLogin(formData: FormData) {
   const usernameField = formData.get("username");
@@ -29,14 +31,27 @@ export async function actionLogin(formData: FormData) {
   if (typeof user != "string" && user.length < 1) {
     return `Wrong credentials`;
   }
-  if (password !== user[0].hashedPassword || username !== user[0].userName) {
+  // Check password
+  const passwordMatches = await bcrypt.compare(
+    password,
+    user[0].hashedPassword
+  );
+  if (!passwordMatches) {
     return `Wrong credentials`;
   }
+  /*if (password !== user[0].hashedPassword || username !== user[0].userName) {
+    return `Wrong credentials`;
+  }*/
   /* if (password !== generalPassword || username !== generalUser) {
     return `Wrong credentials`;
   }*/
-
-  cookies().set("auth", "6");
+  // Create Session
+  const newSession = await createSession(user[0].userId);
+  if (typeof newSession == "string") {
+    return `Could not create new session`;
+  }
+  //cookies().set("auth", "6");
+  cookies().set("auth", newSession.sessionId);
 
   const pathField = formData.get("path");
   const pathObj = pathField?.valueOf();

@@ -7,13 +7,13 @@ import {
   MessageDb,
 } from "./messages";
 import {
-  createSession,
+  insertSession,
   deleteBySessionId,
   deleteByUserId,
   Session,
 } from "./sessions";
 import {
-  createUser,
+  insertUser,
   getAllUsers,
   getUserById,
   updateUser,
@@ -22,7 +22,7 @@ import {
 } from "./users";
 
 const user1: User = {
-  //userId: 1,
+  userId: "1",
   userName: "rasco3",
   hashedPassword: "Pepito12345",
   //name: null,
@@ -56,13 +56,13 @@ const message1: MessageDb = {
   text: "Mi primer mensaje",
   //messageDeleted?: boolean;
   forumId: 2,
-  userId: 1,
+  userId: "1",
 };
 
 const session1: Session = {
-  //sessionId?: number;
+  sessionId: "1",
   expiresAt: new Date(new Date().setDate(new Date().getDate() + 30)),
-  userId: 2,
+  userId: "2",
 };
 
 /*const createUserTest = (async function () {
@@ -125,7 +125,7 @@ const getAllMessagesByForumTest = (async function () {
 })();
 
 const createSessionTest = (async function () {
-  const value = await createSession(session1);
+  const value = await insertSession(session1);
   //console.log(value);
 })();
 
@@ -135,7 +135,7 @@ const createSessionTest = (async function () {
   })();*/
 
 const deleteBySessionIdTest = (async function () {
-  const value = await deleteByUserId(1);
+  const value = await deleteByUserId("1");
   //console.log(value);
 })();
 

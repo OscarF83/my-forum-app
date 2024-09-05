@@ -22,7 +22,7 @@ export type UserUpdate = {
   userDeleted?: boolean;
 };
 
-export async function createUser(userData: User) {
+export async function insertUser(userData: User) {
   try {
     const result = await db.users.create({ data: userData });
     return result;

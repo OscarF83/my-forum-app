@@ -1,8 +1,8 @@
 import { actionGetMessagesByForumId } from "@/actions/actionMessagesDb";
 import Message from "@/components/Message";
 import MessageError from "@/components/MessageError";
-import { getForumById } from "@/lib/forums";
-import { getAllMessagesByForumIdWithUserName } from "@/lib/messages";
+import { getForumById } from "@/db/forums";
+import { getAllMessagesByForumIdWithUserName } from "@/db/messages";
 import { redirect } from "next/navigation";
 
 type ForumPageProps = {

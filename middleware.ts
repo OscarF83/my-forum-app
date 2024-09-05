@@ -1,6 +1,6 @@
 import { cookies } from "next/headers";
 import { NextRequest, NextResponse } from "next/server";
-import { getSessionById } from "./lib/sessions";
+import { getSessionById } from "./db/sessions";
 
 export async function middleware(req: NextRequest) {
   const authCookie = cookies().get("auth");
@@ -9,14 +9,22 @@ export async function middleware(req: NextRequest) {
       new URL(`/login?path=${req.nextUrl.pathname}`, req.url)
     );
   }
-  const token = authCookie.value;
-  const session = await getSessionById(token);
-  if(typeof session == "string"){
-    return
+  const sessionId = authCookie.value;
+  const session = await getSessionById(sessionId);
+  if (typeof session == "string") {
+    return NextResponse.redirect(
+      new URL(`/login?path=${req.nextUrl.pathname}`, req.url)
+    );
   }
-  if (!req.nextUrl.searchParams.has("userId")) {
+  const now = new Date();
+  if (session[0].expiresAt < now) {
+    return NextResponse.redirect(
+      new URL(`/login?path=${req.nextUrl.pathname}`, req.url)
+    );
+  }
+  if (!req.nextUrl.searchParams.has("rrr")) {
     const userId = session[0].userId;
-    req.nextUrl.searchParams.set("userId", `${session[0].userId}`);
+    req.nextUrl.searchParams.set("rrr", `${session[0].userId}`);
     return NextResponse.redirect(req.nextUrl);
   }
   /*const userId = "1";

@@ -1,7 +1,7 @@
 "use client";
 
 import { actionDeleteMessageDb } from "@/actions/actionMessagesDb";
-import { MessageDbReturn } from "@/lib/messages";
+import { MessageDbReturn } from "@/db/messages";
 import { useRef } from "react";
 
 /*export type MessageStructure = {

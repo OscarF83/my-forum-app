@@ -2,7 +2,7 @@
 
 import { useRouter } from "next/navigation";
 import { Button } from "./ui/button";
-import { type Forum } from "@/lib/forums";
+import { type Forum } from "@/db/forums";
 
 type ForumListProps = {
   forum: Forum;

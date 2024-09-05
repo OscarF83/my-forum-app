@@ -1,6 +1,6 @@
 import ForumList from "@/components/ForumList";
 import MessageError from "@/components/MessageError";
-import { getAllForums } from "@/lib/forums";
+import { getAllForums } from "@/db/forums";
 import Link from "next/link";
 
 export default async function Forums() {

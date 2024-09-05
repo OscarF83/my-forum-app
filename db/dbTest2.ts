@@ -1,5 +1,5 @@
-import { createSession, Session } from "./sessions";
-import { createUser, User } from "./users";
+import { insertSession, Session } from "./sessions";
+import { insertUser, User } from "./users";
 
 const user1: User = {
     userId: crypto.randomUUID(),
@@ -12,7 +12,7 @@ const user1: User = {
     userDeleted: true,
   };
   const createUserTest = (async function () {
-    const value = await createUser(user1);
+    const value = await insertUser(user1);
     console.log(value);
   })();
   const session1: Session = {
@@ -21,6 +21,6 @@ const user1: User = {
     userId: "1",
   };
   const createSessionTest = (async function () {
-    const value = await createSession(session1);
+    const value = await insertSession(session1);
     console.log(value);
   })();
