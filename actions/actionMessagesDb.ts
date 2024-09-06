@@ -43,16 +43,9 @@ export async function actionGetMessagesByForumId(forumId: number) {
   return newMessagesList;
 }
 
-export async function actionDeleteMessageDb(
-  id: number,
-  password: string | null
-) {
-  const foundMessage: MessageDb[] | string = await getMessageById(id);
-  if (typeof foundMessage != "string") {
-    if (foundMessage[0].userId == password) {
-      await updateMessage(id, { messageDeleted: true });
-    }
-  }
+export async function actionDeleteMessageDb(id: number) {
+  await updateMessage(id, { messageDeleted: true });
+
   const allForums = await getAllForums();
   if (typeof allForums != "string") {
     allForums.map((a) => revalidatePath(`/forums/${a.forumId}`));

@@ -15,6 +15,7 @@ export type MessageDbReturn = {
   text: string;
   messageDeleted?: boolean;
   users: {
+    userId: string;
     userName: string;
   };
 };
@@ -98,6 +99,7 @@ export async function getAllMessagesByForumIdWithUserName(forumId: number) {
         messageDeleted: true,
         users: {
           select: {
+            userId: true,
             userName: true,
           },
         },

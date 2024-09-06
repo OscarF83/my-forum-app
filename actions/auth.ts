@@ -4,7 +4,7 @@ import { getUserByUserName } from "@/db/users";
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 import * as bcrypt from "bcryptjs";
-import { createSession } from "@/db/sessions";
+import { createSession, deleteBySessionId } from "@/db/sessions";
 
 export async function actionLogin(formData: FormData) {
   const usernameField = formData.get("username");
@@ -60,6 +60,10 @@ export async function actionLogin(formData: FormData) {
 }
 
 export async function actionLogout() {
+  const sessionId = cookies().get("auth");
   cookies().delete("auth");
+  if (sessionId) {
+    await deleteBySessionId(sessionId.value);
+  }
   redirect("/login");
 }
