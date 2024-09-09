@@ -1,6 +1,6 @@
 "use server";
 
-import { getAllForums } from "@/db/forums";
+import { createForum, Forum, getAllForums } from "@/db/forums";
 import {
   createMessage,
   getAllMessagesByForumIdWithUserName,
@@ -50,4 +50,19 @@ export async function actionDeleteMessageDb(id: number) {
   if (typeof allForums != "string") {
     allForums.map((a) => revalidatePath(`/forums/${a.forumId}`));
   }
+}
+
+export async function actionAllForumDb() {
+  const forumsList = await getAllForums();
+  console.log(forumsList);
+  return forumsList;
+}
+
+export async function actionAddForumDb(forumData: Forum) {
+  const newForum = await createForum(forumData);
+  console.log(newForum);
+  if (typeof newForum != "string") {
+    revalidatePath(`/forums`);
+  }
+  return newForum;
 }

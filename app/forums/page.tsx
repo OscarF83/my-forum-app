@@ -1,22 +1,23 @@
+import ForumForm from "@/components/ForumForm";
 import ForumList from "@/components/ForumList";
 import MessageError from "@/components/MessageError";
 import { getAllForums } from "@/db/forums";
-import Link from "next/link";
 
 export default async function Forums() {
-  const listForums = await getAllForums();// solicitud directa a la base no a través de action
+  const listForums = await getAllForums(); // solicitud directa a la base no a través de action
   //const listForums = "Internal Server Error, please try again later!";
 
   if (typeof listForums != "string") {
     return (
-      <main className="flex flex-row">
-        <div></div>
-        <div className="w-screen h-screen flex flex-col justify-center items-center gap-4">
-        {listForums.map((a) => (
-          <ForumList key={a.forumId} forum={a} />
-        ))}
+      <main className="w-screen flex flex-col py-40 pb-20">
+        <div className="flex flex-col justify-center items-center gap-4">
+          {listForums.map((a) => (
+            <ForumList key={a.forumId} forum={a} />
+          ))}
+          <div className="py-6">
+          <ForumForm/>
+          </div>
         </div>
-        <div></div>
       </main>
     );
   } else {
