@@ -44,7 +44,16 @@ export async function actionGetMessagesByForumId(forumId: number) {
 }
 
 export async function actionDeleteMessageDb(id: number) {
-  await updateMessage(id, { messageDeleted: true });
+  const message = await getMessageById(id);
+
+  if (typeof message != "string" && message.length != 0) {
+    if (message[0].messageDeleted) {
+      await updateMessage(id, { messageDeleted: false });
+    } else {
+      await updateMessage(id, { messageDeleted: true });
+    }
+  }
+  //await updateMessage(id, { messageDeleted: true });
 
   const allForums = await getAllForums();
   if (typeof allForums != "string") {

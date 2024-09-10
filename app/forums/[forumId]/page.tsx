@@ -23,26 +23,26 @@ export default async function ForumPage({ params }: ForumPageProps) {
   }
   /////////////////////////////
 
-  // Solicitud a través de action/// 
+  // Solicitud a través de action///
   const messagesList = await actionGetMessagesByForumId(Number(forumId));
   /*const messagesList = await getAllMessagesByForumIdWithUserName(
     Number(forumId)
   );*/ // solicitud directa a la base no a través de action
-  console.log(messagesList[messagesList.length-1]);
-  console.log(forumId);
+  //console.log(messagesList[messagesList.length - 1]);
+  //console.log(forumId);
 
   if (typeof messagesList != "string") {
-    return (
-      <main className="flex flex-row">
-        <div></div>
-        <div className="wmessageDiv flex flex-col-reverse gap-2 justify-center items-center">
-          {messagesList.map((a) => (
-            <Message key={a.messageId} message={a} />
-          ))}
-        </div>
-        <div></div>
-      </main>
-    );
+      return (
+        <main className="flex flex-row">
+          <div></div>
+          <div className="wmessageDiv flex flex-col-reverse gap-2 justify-center items-center">
+            {messagesList.map((a) => (
+              <Message key={a.messageId} message={a} />
+            ))}
+          </div>
+          <div></div>
+        </main>
+      );
   } else {
     return (
       <main className="flex flex-row px-80 py-10">
