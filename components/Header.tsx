@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { Button } from "./ui/button";
+import UserMenu from "./UserMenu";
 
 export default function Header() {
     const router = useRouter();
@@ -21,6 +22,8 @@ export default function Header() {
       >
         Forums
       </Button>
+      <div className="flex-1"></div>
+      <UserMenu />
     </header>
   );
 }

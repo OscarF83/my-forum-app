@@ -9,6 +9,8 @@ import {
   type MessageDbReturn,
   updateMessage,
 } from "@/db/messages";
+import { getSessionById } from "@/db/sessions";
+import { getUserById } from "@/db/users";
 import { revalidatePath } from "next/cache";
 //import { redirect } from "next/navigation";
 
@@ -74,4 +76,18 @@ export async function actionAddForumDb(forumData: Forum) {
     revalidatePath(`/forums`);
   }
   return newForum;
+}
+
+export async function actionGetUserById(id: string) {
+  const user = await getUserById(id);
+  return user;
+}
+
+export async function actionGetUserByIdSession(id: string) {
+  const session = await await getSessionById(id);
+  if (typeof session == "string") {
+    return session;
+  }
+  const user = await getUserById(session[0].userId);
+  return user;
 }

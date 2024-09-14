@@ -1,4 +1,5 @@
 import { db } from "./db";
+import { getSessionById } from "./sessions";
 
 export type User = {
   userId: string;
@@ -77,4 +78,13 @@ export async function getUserByUserName(userName: string) {
     console.log(`Error caught: ${e}`);
     return "Internal Server Error, please try again later!";
   }
+}
+
+export async function serverGetUser(sessionId: string) {
+  const session = await await getSessionById(sessionId);
+  if (typeof session == "string") {
+    return session;
+  }
+  const user = await getUserById(session[0].userId);
+  return user;
 }
