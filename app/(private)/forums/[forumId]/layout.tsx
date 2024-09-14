@@ -7,11 +7,6 @@ type LayoutProps = {
     forumId: string;
   }
 };
-type SidePageProps = {
-  params: {
-    forumId: string;
-  };
-};
 
 export default async function Layout({ children, params }: LayoutProps) {
 
