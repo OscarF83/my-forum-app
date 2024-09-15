@@ -2,7 +2,7 @@
 
 import React, { useRef, useState } from "react";
 import { actionAddMessageDb } from "@/actions/actionMessagesDb";
-import { useSearchParams } from "next/navigation";
+import { useLoggedInUser } from "./UserProvider";
 
 type SideForumIdProps = {
   sideForumId: string;
@@ -12,26 +12,19 @@ export default function SideForm({ sideForumId }: SideForumIdProps) {
   const formRef = useRef<HTMLFormElement>(null);
   const [inputFill, setInputFill] = useState("");
 
-  //// Aqui capturo el userId//// es podria canviar per sessionId i buscar despres userId
-  const searchParams = useSearchParams();
-  const userId = searchParams.get("rrr");
-  //////////////////////////////////
+  const user = useLoggedInUser();
 
   const addMessage = async (formData: FormData) => {
     formRef.current?.reset();
-    //const nickField = formData.get("nick");
-    //const nameField = formData.get("name");
     const messageField = formData.get("message");
-    if (/*(nickField === "")||(nameField === "")||(*/ messageField === "") {
-      /*)*/ setInputFill("All input fields must be completed!");
+    if (messageField === "") {
+      setInputFill("All input fields must be completed!");
     } else {
-      //setInputFill("");
       const result = await actionAddMessageDb(
         formData,
         Number(sideForumId),
-        userId ? userId : "0"   // OJO!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+        user ? user.userId : "0" // OJO!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
       );
-      //const result = "Internal Server Error, please try again later!";
       if (typeof result != "string") {
         setInputFill("");
       } else {
@@ -44,18 +37,6 @@ export default function SideForm({ sideForumId }: SideForumIdProps) {
     <div>
       <form ref={formRef} action={addMessage} className="px-4 w-60">
         <div className="top-40 flex flex-col gap-4">
-          {/*<div className="px-1 text-white">Nickname:</div>
-        <input
-          type="text"
-          name="nick"
-          className="border shadow px-2 mr-2 rounded-lg"
-        />
-        <div className="px-1 text-white">Password to delete:</div>
-        <input
-          type="password"
-          name="name"
-          className="border shadow px-2 mr-2 rounded-lg"
-        />*/}
           <div className="px-1 text-white">Message:</div>
           <textarea
             name="message"

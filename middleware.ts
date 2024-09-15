@@ -22,11 +22,11 @@ export async function middleware(req: NextRequest) {
       new URL(`/login?path=${req.nextUrl.pathname}`, req.url)
     );
   }
-  if (!req.nextUrl.searchParams.has("rrr")) {
+ /* if (!req.nextUrl.searchParams.has("rrr")) {
     const userId = session[0].userId;
     req.nextUrl.searchParams.set("rrr", `${session[0].userId}`);
     return NextResponse.redirect(req.nextUrl);
-  }
+  }*/
   /*const userId = "1";
   if (!req.nextUrl.searchParams.has("userId")) {
     req.nextUrl.searchParams.set("userId", userId);

@@ -2,8 +2,8 @@
 
 import { actionDeleteMessageDb } from "@/actions/actionMessagesDb";
 import { MessageDbReturn } from "@/db/messages";
-import { useSearchParams } from "next/navigation";
 import { useRef } from "react";
+import { useLoggedInUser } from "./UserProvider";
 
 type MessageProps = {
   message: MessageDbReturn;
@@ -41,13 +41,14 @@ const RestoreImage = () => (
 export default function Message({ message }: MessageProps) {
   const { date, text, users } = message;
   const textRef = useRef<HTMLInputElement | null>(null);
-  const searchParams = useSearchParams();
-  const userId = searchParams.get("rrr");
+  const user = useLoggedInUser();
 
   let visible = false;
 
-  if (userId == users.userId) {
-    visible = true;
+  if (user != null) {
+    if (user.userId == users.userId) {
+      visible = true;
+    }
   }
 
   let standardMessage = false;
