@@ -21,9 +21,9 @@ if (!username || !password || !email) {
   console.error(`Usage: create-user.ts <username> <password> <email>`);
   process.exit(1);
 }*/
-const username = "racso8";
+/*const username = "racso8";
 const password = "oscar8";
 const email = "prueba8@hotmail.com";
 
 const result = await createUser(username, password, email);
-console.log(result);
+console.log(result);*/

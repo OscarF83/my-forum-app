@@ -11,6 +11,7 @@ import {
 } from "@/db/messages";
 import { getSessionById } from "@/db/sessions";
 import { getUserById } from "@/db/users";
+import { createUser } from "@/scripts/create-user";
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 //import { redirect } from "next/navigation";
@@ -97,4 +98,16 @@ export async function actionGetUserByIdSession(id: string) {
 
 export async function actionGoNewForum() {
   redirect("/forums/newForum");
+  console.log("/forums/newForum");
+}
+
+export async function actionGoNewUser() {
+  redirect("/forums/newUser");
+  console.log("hola");
+}
+
+export async function actionAddNewUser(userName: string, password: string, email: string) {
+  console.log(userName, password, email);
+  const newUser = await createUser(userName, password, email);
+  return newUser;
 }
