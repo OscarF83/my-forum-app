@@ -9,6 +9,7 @@ import { actionAddForumDb, actionAddNewUser } from "@/actions/actionMessagesDb";
 export default function UserForm() {
   const formRef = useRef<HTMLFormElement>(null);
   const [inputFill, setInputFill] = useState("");
+  const [classTypeError, setclassTypeError] = useState(false);
 
   const addUser = async (formData: FormData) => {
     formRef.current?.reset();
@@ -16,6 +17,7 @@ export default function UserForm() {
     const pwd = formData.get("password");
     const uemail = formData.get("email");
     if (uname === "" || pwd === "" || uemail === "") {
+      setclassTypeError(true);
       setInputFill("All input fields must be completed!");
     } else {
       const userName = uname!.toString();
@@ -23,8 +25,10 @@ export default function UserForm() {
       const email = uemail!.toString();
       const result = await actionAddNewUser(userName, password, email);
       if (typeof result != "string") {
-        setInputFill("");
+        setclassTypeError(false);
+        setInputFill("The new user has been created successfully");
       } else {
+        setclassTypeError(false);
         setInputFill(result); // podemos indicar que no ha sido posible crear el nuevo foro
       }
     }
@@ -55,11 +59,13 @@ export default function UserForm() {
           name="email"
           className="px-4 border shadow rounded-lg"
         />
-        <div className="px-1 font-bold text-red-500">{inputFill}</div>
-        </div>
-      <Button className=" bg-stone-600 w-32 h-32 p-0">
-        Send
-      </Button>
+        {classTypeError ? (
+          <div className="px-1 font-bold text-red-500">{inputFill}</div>
+        ) : (
+          <div className="px-1 text-green-600">{inputFill}</div>
+        )}
+      </div>
+      <Button className=" bg-stone-600 w-32 h-32 p-0">Send</Button>
     </form>
   );
 }
