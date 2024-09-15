@@ -12,6 +12,7 @@ import {
 import { getSessionById } from "@/db/sessions";
 import { getUserById } from "@/db/users";
 import { revalidatePath } from "next/cache";
+import { redirect } from "next/navigation";
 //import { redirect } from "next/navigation";
 
 export async function actionAddMessageDb(
@@ -74,6 +75,8 @@ export async function actionAddForumDb(forumData: Forum) {
   console.log(newForum);
   if (typeof newForum != "string") {
     revalidatePath(`/forums`);
+    redirect("/forums");
+    return newForum
   }
   return newForum;
 }
@@ -84,10 +87,14 @@ export async function actionGetUserById(id: string) {
 }
 
 export async function actionGetUserByIdSession(id: string) {
-  const session = await await getSessionById(id);
+  const session = await getSessionById(id);
   if (typeof session == "string") {
     return session;
   }
   const user = await getUserById(session[0].userId);
   return user;
+}
+
+export async function actionGoNewForum() {
+  redirect("/forums/newForum");
 }

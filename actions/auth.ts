@@ -67,3 +67,7 @@ export async function actionLogout() {
   }
   redirect("/login");
 }
+
+export async function actionGoLogin() {
+  redirect("/login");
+}

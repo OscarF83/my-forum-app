@@ -3,8 +3,6 @@
 import React, { useRef, useState } from "react";
 import { actionAddMessageDb } from "@/actions/actionMessagesDb";
 import { useSearchParams } from "next/navigation";
-import { Button } from "./ui/button";
-import { actionLogout } from "@/actions/auth";
 
 type SideForumIdProps = {
   sideForumId: string;
@@ -69,13 +67,6 @@ export default function SideForm({ sideForumId }: SideForumIdProps) {
           <div className="px-1 font-bold text-red-500">{inputFill}</div>
         </div>
       </form>
-      <Button
-        variant="link"
-        className="text-white"
-        onClick={() => actionLogout()}
-      >
-        Logout
-      </Button>
     </div>
   );
 }

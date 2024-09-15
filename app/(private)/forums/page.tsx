@@ -1,4 +1,3 @@
-import ForumForm from "@/components/ForumForm";
 import ForumList from "@/components/ForumList";
 import MessageError from "@/components/MessageError";
 import { getAllForums } from "@/db/forums";
@@ -14,9 +13,6 @@ export default async function Forums() {
           {listForums.map((a) => (
             <ForumList key={a.forumId} forum={a} />
           ))}
-          <div className="py-6">
-          <ForumForm/>
-          </div>
         </div>
       </main>
     );

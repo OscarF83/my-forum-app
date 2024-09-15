@@ -1,7 +1,7 @@
 "use client";
 
-import { actionGetUserById, actionGetUserByIdSession } from "@/actions/actionMessagesDb";
-import { actionLogout } from "@/actions/auth";
+import { actionGetUserById, actionGetUserByIdSession, actionGoNewForum } from "@/actions/actionMessagesDb";
+import { actionGoLogin, actionLogout } from "@/actions/auth";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -38,13 +38,28 @@ import { useLoggedInUser } from "./UserProvider";
  export default function UserMenu() {
     const user = useLoggedInUser();
     if (user === null) {
-      return <></>
+      return (
+        <DropdownMenu>
+          <DropdownMenuTrigger>Hello, identify yourself</DropdownMenuTrigger>
+          <DropdownMenuContent>
+            <DropdownMenuLabel>My Account</DropdownMenuLabel>
+            <DropdownMenuSeparator />
+            <DropdownMenuItem onClick={() => actionGoLogin()}>
+              Login
+            </DropdownMenuItem>
+          </DropdownMenuContent>
+        </DropdownMenu>
+      );
     }
   return (
     <DropdownMenu>
-      <DropdownMenuTrigger>{user.userName}</DropdownMenuTrigger>
+      <DropdownMenuTrigger>Hello, {user.userName}</DropdownMenuTrigger>
       <DropdownMenuContent>
         <DropdownMenuLabel>My Account</DropdownMenuLabel>
+        <DropdownMenuSeparator />
+        <DropdownMenuItem onClick={() => actionGoNewForum()}>
+          Create New Forum
+        </DropdownMenuItem>
         <DropdownMenuSeparator />
         <DropdownMenuItem onClick={() => actionLogout()}>
           Logout
