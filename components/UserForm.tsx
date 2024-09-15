@@ -1,10 +1,8 @@
 "use client";
 
-import { useRouter } from "next/navigation";
 import { Button } from "./ui/button";
-import { type Forum } from "@/db/forums";
 import { useRef, useState } from "react";
-import { actionAddForumDb, actionAddNewUser } from "@/actions/actionMessagesDb";
+import { actionAddNewUser } from "@/actions/actionMessagesDb";
 
 export default function UserForm() {
   const formRef = useRef<HTMLFormElement>(null);
@@ -29,7 +27,7 @@ export default function UserForm() {
         setInputFill("The new user has been created successfully");
       } else {
         setclassTypeError(false);
-        setInputFill(result); // podemos indicar que no ha sido posible crear el nuevo foro
+        setInputFill(result);
       }
     }
   };

@@ -3,18 +3,17 @@ import React from "react";
 
 type LayoutProps = {
   children: React.ReactNode;
-  params:{
+  params: {
     forumId: string;
-  }
+  };
 };
 
 export default async function Layout({ children, params }: LayoutProps) {
-
-  const {forumId} = params;
+  const { forumId } = params;
 
   return (
     <div className="hsidebar w-60 flex flex-row items-stretch py-40 bg-stone-600">
-      <SideForm sideForumId={forumId}/>
+      <SideForm sideForumId={forumId} />
       <div>{children}</div>
     </div>
   );

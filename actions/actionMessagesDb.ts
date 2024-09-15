@@ -77,7 +77,7 @@ export async function actionAddForumDb(forumData: Forum) {
   if (typeof newForum != "string") {
     revalidatePath(`/forums`);
     redirect("/forums");
-    return newForum
+    return newForum;
   }
   return newForum;
 }
@@ -98,15 +98,21 @@ export async function actionGetUserByIdSession(id: string) {
 
 export async function actionGoNewForum() {
   redirect("/forums/newForum");
-  console.log("/forums/newForum");
 }
 
 export async function actionGoNewUser() {
   redirect("/forums/newUser");
-  console.log("hola");
 }
 
-export async function actionAddNewUser(userName: string, password: string, email: string) {
+export async function actionGoForums() {
+  redirect("/forums");
+}
+
+export async function actionAddNewUser(
+  userName: string,
+  password: string,
+  email: string
+) {
   console.log(userName, password, email);
   const newUser = await createUser(userName, password, email);
   return newUser;

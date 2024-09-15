@@ -4,7 +4,6 @@ import { getAllForums } from "@/db/forums";
 
 export default async function Forums() {
   const listForums = await getAllForums(); // solicitud directa a la base no a través de action
-  //const listForums = "Internal Server Error, please try again later!";
 
   if (typeof listForums != "string") {
     return (

@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 import Link from "next/link";
 import { useRouter } from "next/navigation";
@@ -6,8 +6,8 @@ import { Button } from "./ui/button";
 import UserMenu from "./UserMenu";
 
 export default function Header() {
-    const router = useRouter();
-  
+  const router = useRouter();
+
   return (
     <header className="fixed top-0 left-0 right-0 h-20 bg-stone-700 text-white flex flex-row items-center px-4">
       <Link href="/">

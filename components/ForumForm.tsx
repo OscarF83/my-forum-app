@@ -1,8 +1,6 @@
 "use client";
 
-import { useRouter } from "next/navigation";
 import { Button } from "./ui/button";
-import { type Forum } from "@/db/forums";
 import { useRef, useState } from "react";
 import { actionAddForumDb } from "@/actions/actionMessagesDb";
 
@@ -23,7 +21,7 @@ export default function ForumForm() {
       if (typeof result != "string") {
         setInputFill("");
       } else {
-        setInputFill(result); // podemos indicar que no ha sido posible crear el nuevo foro
+        setInputFill(result);
       }
     }
   };
@@ -41,17 +39,14 @@ export default function ForumForm() {
           name="forumName"
           className="px-4 border shadow rounded-lg"
         />
-      
         <div className="px-1">Description:</div>
         <textarea
           name="forumDescription"
           className="border shadow px-4 py-2 mr-2 w-96 h-40 rounded-lg text-wrap"
         />
         <div className="px-1 font-bold text-red-500">{inputFill}</div>
-        </div>
-      <Button className=" bg-stone-600 w-32 h-32 p-0">
-        Send
-      </Button>
+      </div>
+      <Button className=" bg-stone-600 w-32 h-32 p-0">Send</Button>
     </form>
   );
 }

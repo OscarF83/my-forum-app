@@ -1,6 +1,7 @@
 "use client";
 
 import {
+  actionGoForums,
   actionGoNewForum,
   actionGoNewUser,
 } from "@/actions/actionMessagesDb";
@@ -14,7 +15,6 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { useLoggedInUser } from "./UserProvider";
-
 
 export default function UserMenu() {
   const user = useLoggedInUser();
@@ -32,36 +32,23 @@ export default function UserMenu() {
       </DropdownMenu>
     );
   }
-  if (user.userId === "48923dad-e6cc-495c-8d0b-0a7af7cfadc4"){
-      return (
-        <DropdownMenu>
-          <DropdownMenuTrigger>Hello, {user.userName}</DropdownMenuTrigger>
-          <DropdownMenuContent>
-            <DropdownMenuLabel>My Account</DropdownMenuLabel>
-            <DropdownMenuSeparator />
-            <DropdownMenuItem onClick={() => actionGoNewForum()}>
-              Create New Forum
-            </DropdownMenuItem>
-            <DropdownMenuSeparator />
-            <DropdownMenuItem onClick={() => actionGoNewUser()}>
-              Create New User
-            </DropdownMenuItem>
-            <DropdownMenuSeparator />
-            <DropdownMenuItem onClick={() => actionLogout()}>
-              Logout
-            </DropdownMenuItem>
-          </DropdownMenuContent>
-        </DropdownMenu>
-      );
-    }
+  if (user.userId === "48923dad-e6cc-495c-8d0b-0a7af7cfadc4") {
     return (
       <DropdownMenu>
         <DropdownMenuTrigger>Hello, {user.userName}</DropdownMenuTrigger>
         <DropdownMenuContent>
           <DropdownMenuLabel>My Account</DropdownMenuLabel>
           <DropdownMenuSeparator />
+          <DropdownMenuItem onClick={() => actionGoForums()}>
+            Forums
+          </DropdownMenuItem>
+          <DropdownMenuSeparator />
           <DropdownMenuItem onClick={() => actionGoNewForum()}>
             Create New Forum
+          </DropdownMenuItem>
+          <DropdownMenuSeparator />
+          <DropdownMenuItem onClick={() => actionGoNewUser()}>
+            Create New User
           </DropdownMenuItem>
           <DropdownMenuSeparator />
           <DropdownMenuItem onClick={() => actionLogout()}>
@@ -70,4 +57,25 @@ export default function UserMenu() {
         </DropdownMenuContent>
       </DropdownMenu>
     );
+  }
+  return (
+    <DropdownMenu>
+      <DropdownMenuTrigger>Hello, {user.userName}</DropdownMenuTrigger>
+      <DropdownMenuContent>
+        <DropdownMenuLabel>My Account</DropdownMenuLabel>
+        <DropdownMenuSeparator />
+        <DropdownMenuItem onClick={() => actionGoForums()}>
+          Forums
+        </DropdownMenuItem>
+        <DropdownMenuSeparator />
+        <DropdownMenuItem onClick={() => actionGoNewForum()}>
+          Create New Forum
+        </DropdownMenuItem>
+        <DropdownMenuSeparator />
+        <DropdownMenuItem onClick={() => actionLogout()}>
+          Logout
+        </DropdownMenuItem>
+      </DropdownMenuContent>
+    </DropdownMenu>
+  );
 }

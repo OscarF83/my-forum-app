@@ -23,7 +23,7 @@ export default function SideForm({ sideForumId }: SideForumIdProps) {
       const result = await actionAddMessageDb(
         formData,
         Number(sideForumId),
-        user ? user.userId : "0" // OJO!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+        user ? user.userId : "0"
       );
       if (typeof result != "string") {
         setInputFill("");
