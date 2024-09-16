@@ -7,8 +7,8 @@ export default async function Forums() {
 
   if (typeof listForums != "string") {
     return (
-      <main className="w-screen flex flex-col py-40 pb-20">
-        <div className="flex flex-col justify-center items-center gap-4">
+      <main className="w-screen flex flex-col py-40 pb-20 justify-center items-center">
+        <div className="flex flex-col items-start gap-4">
           {listForums.map((a) => (
             <ForumList key={a.forumId} forum={a} />
           ))}

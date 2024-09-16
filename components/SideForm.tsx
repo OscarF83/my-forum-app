@@ -40,6 +40,7 @@ export default function SideForm({ sideForumId }: SideForumIdProps) {
           <div className="px-1 text-white">Message:</div>
           <textarea
             name="message"
+            placeholder="Write your message here..."
             className="border shadow px-6 py-2 pb-40 mr-2 rounded-lg text-wrap"
           />
           <button className="border shadow font-bold px-2 py-2 mr-2 rounded-lg bg-stone-200 hover:bg-stone-400">

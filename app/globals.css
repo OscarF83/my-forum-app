@@ -68,7 +68,7 @@
   }
 }
 h1 {
-  @apply font-extrabold text-3xl mb-4;
+  @apply font-extrabold text-3xl mb-2;
 }
 .wmessage {
   /*width: 800px;*/

@@ -16,7 +16,7 @@ export default function ForumList({ forum }: ForumListProps) {
     return (
       <div className="flex flex-row">
         <Button
-          className=" bg-stone-600 w-32 h-32 p-0"
+          className=" bg-stone-600 w-40 h-32 p-2"
           onClick={() => router.push(`/forums/${forumId}`)}
         >
           {forumName}

@@ -57,29 +57,31 @@ function LoginPage() {
     <main className="h-screen flex flex-col justify-center items-center">
       <form action={login} className="flex flex-col items-start gap-2">
         <h1>Login {path && `to ${path}`}</h1>
-        <Input
-          type="text"
-          name="username"
-          placeholder="username"
-          onChange={clearMessage}
-        />
-        <div className="relative">
+        <div className="flex flex-col gap-2">
           <Input
-            type={passwdVisible ? "text" : "password"}
-            name="password"
-            placeholder="password"
-            className="pr-8"
+            type="text"
+            name="username"
+            placeholder="username"
             onChange={clearMessage}
           />
-          <div
-            className="absolute top-0 right-0 bottom-0 w-5 flex flex-col justify-center mr-2 opacity-70 cursor-pointer"
-            onClick={() => setPasswdVisible((x) => !x)}
-          >
-            {passwdVisible ? (
-              <IconNotVisible className="w-5 h-5" />
-            ) : (
-              <IconVisible className="w-5 h-5" />
-            )}
+          <div className="relative">
+            <Input
+              type={passwdVisible ? "text" : "password"}
+              name="password"
+              placeholder="password"
+              className="pr-8"
+              onChange={clearMessage}
+            />
+            <div
+              className="absolute top-0 right-0 bottom-0 w-5 flex flex-col justify-center mr-2 opacity-70 cursor-pointer"
+              onClick={() => setPasswdVisible((x) => !x)}
+            >
+              {passwdVisible ? (
+                <IconNotVisible className="w-5 h-5" />
+              ) : (
+                <IconVisible className="w-5 h-5" />
+              )}
+            </div>
           </div>
         </div>
 
