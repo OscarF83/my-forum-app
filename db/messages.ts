@@ -1,3 +1,7 @@
+export const config = {
+  runtime: 'nodejs',
+}
+
 import { db } from "./db";
 
 export type MessageDb = {

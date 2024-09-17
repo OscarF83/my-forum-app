@@ -1,3 +1,7 @@
+export const config = {
+  runtime: 'nodejs',
+}
+
 import { PrismaClient } from "@prisma/client";
 import { PrismaLibSQL } from "@prisma/adapter-libsql";
 import { createClient } from "@libsql/client";
