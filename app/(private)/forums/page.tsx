@@ -1,6 +1,4 @@
-export const config = {
-  runtime: 'nodejs',
-}
+export const runtime = 'nodejs';
 
 import ForumList from "@/components/ForumList";
 import MessageError from "@/components/MessageError";

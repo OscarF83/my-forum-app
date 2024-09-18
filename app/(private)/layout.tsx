@@ -1,6 +1,4 @@
-export const config = {
-  runtime: 'nodejs',
-}
+export const runtime = 'nodejs';
 
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";

@@ -1,6 +1,4 @@
-export const config = {
-  runtime: 'nodejs',
-}
+export const runtime = 'nodejs';
 
 import { db } from "./db";
 import { getSessionById } from "./sessions";
