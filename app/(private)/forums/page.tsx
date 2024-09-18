@@ -1,3 +1,7 @@
+export const config = {
+  runtime: 'nodejs',
+}
+
 import ForumList from "@/components/ForumList";
 import MessageError from "@/components/MessageError";
 import { getAllForums } from "@/db/forums";

@@ -1,3 +1,7 @@
+export const config = {
+  runtime: 'nodejs',
+}
+
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import UserProvider from "@/components/UserProvider";

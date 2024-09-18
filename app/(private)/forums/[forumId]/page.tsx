@@ -1,3 +1,7 @@
+export const config = {
+  runtime: 'nodejs',
+}
+
 import { actionGetMessagesByForumId } from "@/actions/actionMessagesDb";
 import Message from "@/components/Message";
 import MessageError from "@/components/MessageError";

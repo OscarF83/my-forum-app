@@ -1,7 +1,7 @@
 "use client";
 
 import { actionDeleteMessageDb } from "@/actions/actionMessagesDb";
-import { MessageDbReturn } from "@/db/messages";
+import type { MessageDbReturn } from "@/db/messages";
 import { useRef } from "react";
 import { useLoggedInUser } from "./UserProvider";
 

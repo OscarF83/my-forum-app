@@ -10,7 +10,7 @@ export default async function Home() {
       <p className="indent-4 leading-relaxed font-semibold px-40 py-3 text-justify">
         We&apos;re thrilled to have you join our diverse and dynamic communities!
         These forums are your spaces to discuss anything and everything under
-        the sun. Whether you're passionate about technology, arts, sports,
+        the sun. Whether you&apos;re passionate about technology, arts, sports,
         current events, or just looking to share your thoughts and experiences,
         you&apos;ve come to the right places. Across our forums, we celebrate
         curiosity, open-mindedness, and respectful dialogue. Feel free to start
