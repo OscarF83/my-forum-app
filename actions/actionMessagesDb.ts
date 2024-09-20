@@ -6,7 +6,6 @@ import {
   getAllMessagesByForumIdWithUserName,
   getMessageById,
   type MessageDb,
-  type MessageDbReturn,
   updateMessage,
 } from "@/db/messages";
 import { getSessionById } from "@/db/sessions";
@@ -14,7 +13,7 @@ import { getUserById } from "@/db/users";
 import { createUser } from "@/scripts/create-user";
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
-//import { redirect } from "next/navigation";
+
 
 export async function actionAddMessageDb(
   formData: FormData,
@@ -43,7 +42,7 @@ export async function actionAddMessageDb(
 
 export async function actionGetMessagesByForumId(forumId: number) {
   const newMessagesList = await getAllMessagesByForumIdWithUserName(forumId);
-  console.log(newMessagesList);
+  //console.log(newMessagesList);
   return newMessagesList;
 }
 
@@ -57,7 +56,6 @@ export async function actionDeleteMessageDb(id: number) {
       await updateMessage(id, { messageDeleted: true });
     }
   }
-  //await updateMessage(id, { messageDeleted: true });
 
   const allForums = await getAllForums();
   if (typeof allForums != "string") {
@@ -67,13 +65,13 @@ export async function actionDeleteMessageDb(id: number) {
 
 export async function actionAllForumDb() {
   const forumsList = await getAllForums();
-  console.log(forumsList);
+  //console.log(forumsList);
   return forumsList;
 }
 
 export async function actionAddForumDb(forumData: Forum) {
   const newForum = await createForum(forumData);
-  console.log(newForum);
+  //console.log(newForum);
   if (typeof newForum != "string") {
     revalidatePath(`/forums`);
     redirect("/forums");
@@ -113,7 +111,7 @@ export async function actionAddNewUser(
   password: string,
   email: string
 ) {
-  console.log(userName, password, email);
+  //console.log(userName, password, email);
   const newUser = await createUser(userName, password, email);
   return newUser;
 }

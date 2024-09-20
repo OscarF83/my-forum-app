@@ -18,7 +18,7 @@ export default function SideForm({ sideForumId }: SideForumIdProps) {
     formRef.current?.reset();
     const messageField = formData.get("message");
     if (messageField === "") {
-      setInputFill("All input fields must be completed!");
+      setInputFill("You should enter a message!");
     } else {
       const result = await actionAddMessageDb(
         formData,

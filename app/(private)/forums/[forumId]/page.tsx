@@ -1,4 +1,6 @@
 export const runtime = 'nodejs';
+export const dynamic="force-dynamic";
+export const revalidate=0;
 
 import { actionGetMessagesByForumId } from "@/actions/actionMessagesDb";
 import Message from "@/components/Message";
