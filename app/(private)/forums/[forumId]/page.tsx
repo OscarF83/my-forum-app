@@ -5,6 +5,7 @@ export const revalidate=0;
 import { actionGetMessagesByForumId } from "@/actions/actionMessagesDb";
 import Message from "@/components/Message";
 import MessageError from "@/components/MessageError";
+import MessageList from "@/components/MessageList";
 import { getForumById } from "@/db/forums";
 import { redirect } from "next/navigation";
 
@@ -31,11 +32,12 @@ export default async function ForumPage({ params }: ForumPageProps) {
     return (
       <main className="flex flex-row">
         <div></div>
-        <div className="wmessageDiv flex flex-col-reverse gap-2 justify-center items-center">
+        {/*<div className="wmessageDiv flex flex-col-reverse gap-2 justify-center items-center">
           {messagesList.map((a) => (
             <Message key={a.messageId} message={a} />
           ))}
-        </div>
+        </div>*/}
+        <MessageList initialMessagesList={messagesList} forumId={Number(forumId)}/>
         <div></div>
       </main>
     );
