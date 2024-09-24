@@ -13,7 +13,7 @@ My goal is to consolidate the knowledge learned during the course
 - Function or page to create new forums
 - Function or page to create new users
 - Implementation of roles with different levels of privileges, administrator, normal user, etc.
-- Deploy the website with Vercel
+- Deploy the website with Vercel (https://my-forum-app-beta.vercel.app/)
 
 ## Improvements to be developed in a second step outside the scope of the project delivery
 
