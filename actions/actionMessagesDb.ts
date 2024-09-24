@@ -14,7 +14,6 @@ import { createUser } from "@/scripts/create-user";
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 
-
 export async function actionAddMessageDb(
   formData: FormData,
   forumId: number,
@@ -32,11 +31,8 @@ export async function actionAddMessageDb(
 
   const newMessage = await createMessage(newMessageData);
 
-  //revalidatePath(`/forums/${forumId}`);// No funciona
-  const allForums = await getAllForums();
-  if (typeof allForums != "string") {
-    allForums.map((a) => revalidatePath(`/forums/${a.forumId}`));
-  }
+  revalidatePath(`/forums/${forumId}`);
+
   return newMessage;
 }
 

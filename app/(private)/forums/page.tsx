@@ -5,7 +5,7 @@ import MessageError from "@/components/MessageError";
 import { getAllForums } from "@/db/forums";
 
 export default async function Forums() {
-  const listForums = await getAllForums(); // solicitud directa a la base no a través de action
+  const listForums = await getAllForums();
 
   if (typeof listForums != "string") {
     return (

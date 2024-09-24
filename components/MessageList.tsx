@@ -15,23 +15,23 @@ export default function MessageList({
   forumId,
 }: MessageListProps) {
   const [messagesList, setMessagesList] =
-    useState<MessageDbReturn[]>(initialMessagesList); // Estado para los mensajes
+    useState<MessageDbReturn[]>(initialMessagesList);
 
-  // Monitorea cambios en initialData y actualiza el estado
+  // Check changes on initialData and update
   useEffect(() => {
     setMessagesList(initialMessagesList);
   }, [initialMessagesList]);
 
   useEffect(() => {
-    // Llamar a la Server Action para obtener mensajes actualizados
+    // Call Server Action to update messages
     async function newMessagesList() {
       const result = await actionGetMessagesByForumId(forumId);
       if (typeof result != "string") {
-        setMessagesList(result); // Actualizar los mensajes
+        setMessagesList(result); // Update messages
       }
     }
     newMessagesList();
-    // Polling cada 5 segundos
+    // Polling every 5 seconds
     const interval = setInterval(newMessagesList, 5000);
 
     return () => clearInterval(interval);

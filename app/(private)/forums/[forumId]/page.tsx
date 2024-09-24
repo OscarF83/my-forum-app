@@ -1,9 +1,8 @@
-export const runtime = 'nodejs';
-export const dynamic="force-dynamic";
-export const revalidate=0;
+export const runtime = "nodejs";
+export const dynamic = "force-dynamic";
+export const revalidate = 0;
 
 import { actionGetMessagesByForumId } from "@/actions/actionMessagesDb";
-import Message from "@/components/Message";
 import MessageError from "@/components/MessageError";
 import MessageList from "@/components/MessageList";
 import { getForumById } from "@/db/forums";
@@ -26,18 +25,22 @@ export default async function ForumPage({ params }: ForumPageProps) {
     }
   }
 
+  let nameForum = "";
+
+  if (typeof checkForumId != "string") {
+    nameForum = checkForumId[0].forumName;
+  }
+
   const messagesList = await actionGetMessagesByForumId(Number(forumId));
 
   if (typeof messagesList != "string") {
     return (
-      <main className="flex flex-row">
-        <div></div>
-        {/*<div className="wmessageDiv flex flex-col-reverse gap-2 justify-center items-center">
-          {messagesList.map((a) => (
-            <Message key={a.messageId} message={a} />
-          ))}
-        </div>*/}
-        <MessageList initialMessagesList={messagesList} forumId={Number(forumId)}/>
+      <main className="flex flex-col justify-center items-center gap-10">
+        <div className="font-bold text-3xl bg-stone-400 text-white px-3 py-2 rounded-lg">{nameForum}</div>
+        <MessageList
+          initialMessagesList={messagesList}
+          forumId={Number(forumId)}
+        />
         <div></div>
       </main>
     );
