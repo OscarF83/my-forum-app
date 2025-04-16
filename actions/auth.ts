@@ -19,7 +19,7 @@ export async function actionLogin(formData: FormData) {
   }
   const user = await getUserByUserName(username);
   if (typeof user == "string") {
-    return user;
+    return user; // Here if fault returns "Internal Server Error, please try again later!"
   }
   if (typeof user != "string" && user.length < 1) {
     return `Wrong credentials`;
